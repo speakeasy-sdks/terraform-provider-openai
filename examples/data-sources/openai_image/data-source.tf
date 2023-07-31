@@ -1,4 +1,4 @@
-data "terraform_image" "my_image" {
+data "openai_image" "my_image" {
   n               = 1
   prompt          = "A cute baby sea otter"
   response_format = "url"

@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"openai/internal/sdk/pkg/models/operations"
+	"openai/internal/sdk/pkg/models/shared"
+	"openai/internal/sdk/pkg/utils"
 	"strings"
-	"terraform/internal/sdk/pkg/models/operations"
-	"terraform/internal/sdk/pkg/models/shared"
-	"terraform/internal/sdk/pkg/utils"
 )
 
 // openAI - The OpenAI REST API

@@ -1,4 +1,4 @@
-module terraform
+module openai
 
 go 1.18
 

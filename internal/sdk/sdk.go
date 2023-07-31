@@ -5,8 +5,8 @@ package sdk
 import (
 	"fmt"
 	"net/http"
-	"terraform/internal/sdk/pkg/models/shared"
-	"terraform/internal/sdk/pkg/utils"
+	"openai/internal/sdk/pkg/models/shared"
+	"openai/internal/sdk/pkg/utils"
 	"time"
 )
 

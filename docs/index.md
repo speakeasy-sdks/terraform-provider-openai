@@ -15,14 +15,14 @@ OpenAI API: APIs for sampling from and fine-tuning language models
 ```terraform
 terraform {
   required_providers {
-    terraform = {
-      source  = "speakeasy/terraform"
+    openai = {
+      source  = "speakeasy/openai"
       version = "0.0.1"
     }
   }
 }
 
-provider "terraform" {
+provider "openai" {
   # Configuration options
 }
 ```

@@ -13,8 +13,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"net/http"
 	"net/http/httputil"
+	tfReflect "openai/internal/provider/reflect"
 	"reflect"
-	tfReflect "terraform/internal/provider/reflect"
 )
 
 func debugResponse(response *http.Response) string {

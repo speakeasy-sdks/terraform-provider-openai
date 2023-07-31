@@ -4,7 +4,7 @@ package operations
 
 import (
 	"net/http"
-	"terraform/internal/sdk/pkg/models/shared"
+	"openai/internal/sdk/pkg/models/shared"
 )
 
 type RetrieveFileRequest struct {

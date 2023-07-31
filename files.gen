@@ -114,7 +114,7 @@ internal/provider/provider.go
 examples/provider/provider.tf
 internal/provider/completion_data_source.go
 internal/provider/completion_data_source_sdk.go
-examples/data-sources/terraform_completion/data-source.tf
+examples/data-sources/openai_completion/data-source.tf
 internal/provider/image_data_source.go
 internal/provider/image_data_source_sdk.go
-examples/data-sources/terraform_image/data-source.tf
+examples/data-sources/openai_image/data-source.tf

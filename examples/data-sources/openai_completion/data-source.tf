@@ -1,4 +1,4 @@
-data "terraform_completion" "my_completion" {
+data "openai_completion" "my_completion" {
   best_of           = 6
   echo              = false
   frequency_penalty = 71.52
