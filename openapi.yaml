@@ -1577,6 +1577,12 @@ paths:
           }
 
 components:
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Retrieve from https://platform.openai.com/account/api-keys
+      bearerFormat: JWT
   schemas:
     Error:
       type: object
@@ -3066,3 +3072,5 @@ x-oaiMeta:
       title: Edits
       description: |
         Given a prompt and an instruction, the model will return an edited version of the prompt.
+security:
+  - api_key: []

@@ -32,4 +32,5 @@ provider "terraform" {
 
 ### Optional
 
+- `api_key` (String, Sensitive)
 - `server_url` (String) Server URL (defaults to https://api.openai.com/v1)
