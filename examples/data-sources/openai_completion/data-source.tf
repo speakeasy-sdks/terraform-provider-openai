@@ -11,8 +11,7 @@ data "openai_completion" "my_completion" {
   model            = "text-curie-001"
   n                = 1
   presence_penalty = 38.44
-  prompt           = "This is a test."
-  stop             = "\n"
+  prompt           = "...my_prompt..."
   stream           = false
   suffix           = "test."
   temperature      = 1

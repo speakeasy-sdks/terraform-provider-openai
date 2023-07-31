@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"openai/internal/validators"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -44,8 +43,7 @@ type CompletionDataSourceModel struct {
 	N                types.Int64                       `tfsdk:"n"`
 	Object           types.String                      `tfsdk:"object"`
 	PresencePenalty  types.Number                      `tfsdk:"presence_penalty"`
-	Prompt           CreateCompletionRequestPrompt     `tfsdk:"prompt"`
-	Stop             *CreateCompletionRequestStop      `tfsdk:"stop"`
+	Prompt           types.String                      `tfsdk:"prompt"`
 	Stream           types.Bool                        `tfsdk:"stream"`
 	Suffix           types.String                      `tfsdk:"suffix"`
 	Temperature      types.Number                      `tfsdk:"temperature"`
@@ -173,50 +171,11 @@ func (r *CompletionDataSource) Schema(ctx context.Context, req datasource.Schema
 					`[See more information about frequency and presence penalties.](/docs/api-reference/parameter-details)` + "\n" +
 					``,
 			},
-			"prompt": schema.SingleNestedAttribute{
+			"prompt": schema.StringAttribute{
 				Required: true,
-				Attributes: map[string]schema.Attribute{
-					"str": schema.StringAttribute{
-						Optional: true,
-					},
-					"array_ofstr": schema.ListAttribute{
-						Optional:    true,
-						ElementType: types.StringType,
-					},
-					"array_ofinteger": schema.ListAttribute{
-						Optional:    true,
-						ElementType: types.Int64Type,
-					},
-					"array_ofarray_ofinteger": schema.ListAttribute{
-						Optional: true,
-						ElementType: types.ListType{
-							ElemType: types.Int64Type,
-						},
-					},
-				},
-				Validators: []validator.Object{
-					validators.ExactlyOneChild(),
-				},
 				MarkdownDescription: `The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.` + "\n" +
 					`` + "\n" +
 					`Note that <|endoftext|> is the document separator that the model sees during training, so if a prompt is not specified the model will generate as if from the beginning of a new document.` + "\n" +
-					``,
-			},
-			"stop": schema.SingleNestedAttribute{
-				Optional: true,
-				Attributes: map[string]schema.Attribute{
-					"str": schema.StringAttribute{
-						Optional: true,
-					},
-					"array_ofstr": schema.ListAttribute{
-						Optional:    true,
-						ElementType: types.StringType,
-					},
-				},
-				Validators: []validator.Object{
-					validators.ExactlyOneChild(),
-				},
-				MarkdownDescription: `Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.` + "\n" +
 					``,
 			},
 			"stream": schema.BoolAttribute{

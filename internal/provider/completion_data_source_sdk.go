@@ -53,70 +53,7 @@ func (r *CompletionDataSourceModel) ToGetSDKType() *shared.CreateCompletionReque
 	} else {
 		presencePenalty = nil
 	}
-	var prompt shared.CreateCompletionRequestPrompt
-	str := new(string)
-	if !r.Prompt.Str.IsUnknown() && !r.Prompt.Str.IsNull() {
-		*str = r.Prompt.Str.ValueString()
-	} else {
-		str = nil
-	}
-	if str != nil {
-		prompt = shared.CreateCompletionRequestPrompt{
-			Str: str,
-		}
-	}
-	arrayOfstr := make([]string, 0)
-	for _, arrayOfstrItem := range r.Prompt.ArrayOfstr {
-		arrayOfstr = append(arrayOfstr, arrayOfstrItem.ValueString())
-	}
-	if arrayOfstr != nil {
-		prompt = shared.CreateCompletionRequestPrompt{
-			ArrayOfstr: arrayOfstr,
-		}
-	}
-	arrayOfinteger := make([]int64, 0)
-	for _, arrayOfintegerItem := range r.Prompt.ArrayOfinteger {
-		arrayOfinteger = append(arrayOfinteger, arrayOfintegerItem.ValueInt64())
-	}
-	if arrayOfinteger != nil {
-		prompt = shared.CreateCompletionRequestPrompt{
-			ArrayOfinteger: arrayOfinteger,
-		}
-	}
-	arrayOfarrayOfinteger := make([][]int64, 0)
-	for _, arrayOfarrayOfintegerItem := range r.Prompt.ArrayOfarrayOfinteger {
-		arrayOfarrayOfintegerTmp := make([]int64, 0)
-		for _, item := range arrayOfarrayOfintegerItem {
-			arrayOfarrayOfintegerTmp = append(arrayOfarrayOfintegerTmp, item.ValueInt64())
-		}
-		arrayOfarrayOfinteger = append(arrayOfarrayOfinteger, arrayOfarrayOfintegerTmp)
-	}
-	if arrayOfarrayOfinteger != nil {
-		prompt = shared.CreateCompletionRequestPrompt{
-			ArrayOfarrayOfinteger: arrayOfarrayOfinteger,
-		}
-	}
-	var stop *shared.CreateCompletionRequestStop
-	str1 := new(string)
-	if !r.Stop.Str.IsUnknown() && !r.Stop.Str.IsNull() {
-		*str1 = r.Stop.Str.ValueString()
-	} else {
-		str1 = nil
-	}
-	if str1 != nil {
-		stop = &shared.CreateCompletionRequestStop{
-			Str: str1,
-		}
-	}
-	arrayOfstr1 := make([]string, 0)
-	for _, arrayOfstrItem1 := range r.Stop.ArrayOfstr {
-		arrayOfstr1 = append(arrayOfstr1, arrayOfstrItem1.ValueString())
-	}
-	if arrayOfstr1 != nil {
-		stop = &shared.CreateCompletionRequestStop{
-			ArrayOfstr: arrayOfstr1,
-		}
-	}
+	prompt := r.Prompt.ValueString()
 	stream := new(bool)
 	if !r.Stream.IsUnknown() && !r.Stream.IsNull() {
 		*stream = r.Stream.ValueBool()
@@ -158,7 +95,6 @@ func (r *CompletionDataSourceModel) ToGetSDKType() *shared.CreateCompletionReque
 		N:                n,
 		PresencePenalty:  presencePenalty,
 		Prompt:           prompt,
-		Stop:             stop,
 		Stream:           stream,
 		Suffix:           suffix,
 		Temperature:      temperature,

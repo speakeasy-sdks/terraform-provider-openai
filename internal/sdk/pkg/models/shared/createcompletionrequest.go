@@ -52,122 +52,6 @@ func (e *CreateCompletionRequestModel) UnmarshalJSON(data []byte) error {
 	}
 }
 
-type CreateCompletionRequestPromptType string
-
-const (
-	CreateCompletionRequestPromptTypeStr                   CreateCompletionRequestPromptType = "str"
-	CreateCompletionRequestPromptTypeArrayOfstr            CreateCompletionRequestPromptType = "arrayOfstr"
-	CreateCompletionRequestPromptTypeArrayOfinteger        CreateCompletionRequestPromptType = "arrayOfinteger"
-	CreateCompletionRequestPromptTypeArrayOfarrayOfinteger CreateCompletionRequestPromptType = "arrayOfarrayOfinteger"
-)
-
-type CreateCompletionRequestPrompt struct {
-	Str                   *string
-	ArrayOfstr            []string
-	ArrayOfinteger        []int64
-	ArrayOfarrayOfinteger [][]int64
-
-	Type CreateCompletionRequestPromptType
-}
-
-func CreateCreateCompletionRequestPromptStr(str string) CreateCompletionRequestPrompt {
-	typ := CreateCompletionRequestPromptTypeStr
-
-	return CreateCompletionRequestPrompt{
-		Str:  &str,
-		Type: typ,
-	}
-}
-
-func CreateCreateCompletionRequestPromptArrayOfstr(arrayOfstr []string) CreateCompletionRequestPrompt {
-	typ := CreateCompletionRequestPromptTypeArrayOfstr
-
-	return CreateCompletionRequestPrompt{
-		ArrayOfstr: arrayOfstr,
-		Type:       typ,
-	}
-}
-
-func CreateCreateCompletionRequestPromptArrayOfinteger(arrayOfinteger []int64) CreateCompletionRequestPrompt {
-	typ := CreateCompletionRequestPromptTypeArrayOfinteger
-
-	return CreateCompletionRequestPrompt{
-		ArrayOfinteger: arrayOfinteger,
-		Type:           typ,
-	}
-}
-
-func CreateCreateCompletionRequestPromptArrayOfarrayOfinteger(arrayOfarrayOfinteger [][]int64) CreateCompletionRequestPrompt {
-	typ := CreateCompletionRequestPromptTypeArrayOfarrayOfinteger
-
-	return CreateCompletionRequestPrompt{
-		ArrayOfarrayOfinteger: arrayOfarrayOfinteger,
-		Type:                  typ,
-	}
-}
-
-func (u *CreateCompletionRequestPrompt) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
-
-	str := new(string)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&str); err == nil {
-		u.Str = str
-		u.Type = CreateCompletionRequestPromptTypeStr
-		return nil
-	}
-
-	arrayOfstr := []string{}
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&arrayOfstr); err == nil {
-		u.ArrayOfstr = arrayOfstr
-		u.Type = CreateCompletionRequestPromptTypeArrayOfstr
-		return nil
-	}
-
-	arrayOfinteger := []int64{}
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&arrayOfinteger); err == nil {
-		u.ArrayOfinteger = arrayOfinteger
-		u.Type = CreateCompletionRequestPromptTypeArrayOfinteger
-		return nil
-	}
-
-	arrayOfarrayOfinteger := [][]int64{}
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&arrayOfarrayOfinteger); err == nil {
-		u.ArrayOfarrayOfinteger = arrayOfarrayOfinteger
-		u.Type = CreateCompletionRequestPromptTypeArrayOfarrayOfinteger
-		return nil
-	}
-
-	return errors.New("could not unmarshal into supported union types")
-}
-
-func (u CreateCompletionRequestPrompt) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return json.Marshal(u.Str)
-	}
-
-	if u.ArrayOfstr != nil {
-		return json.Marshal(u.ArrayOfstr)
-	}
-
-	if u.ArrayOfinteger != nil {
-		return json.Marshal(u.ArrayOfinteger)
-	}
-
-	if u.ArrayOfarrayOfinteger != nil {
-		return json.Marshal(u.ArrayOfarrayOfinteger)
-	}
-
-	return nil, nil
-}
-
 type CreateCompletionRequestStopType string
 
 const (
@@ -286,7 +170,7 @@ type CreateCompletionRequest struct {
 	//
 	// Note that <|endoftext|> is the document separator that the model sees during training, so if a prompt is not specified the model will generate as if from the beginning of a new document.
 	//
-	Prompt CreateCompletionRequestPrompt `json:"prompt"`
+	Prompt string `json:"prompt"`
 	// Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
 	//
 	Stop *CreateCompletionRequestStop `json:"stop,omitempty"`

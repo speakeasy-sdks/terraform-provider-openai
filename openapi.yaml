@@ -1656,28 +1656,7 @@ components:
             Note that <|endoftext|> is the document separator that the model sees during training, so if a prompt is not specified the model will generate as if from the beginning of a new document.
           default: '<|endoftext|>'
           nullable: true
-          oneOf:
-            - type: string
-              default: ''
-              example: "This is a test."
-            - type: array
-              items:
-                type: string
-                default: ''
-                example: "This is a test."
-            - type: array
-              minItems: 1
-              items:
-                type: integer
-              example: "[1212, 318, 257, 1332, 13]"
-            - type: array
-              minItems: 1
-              items:
-                type: array
-                minItems: 1
-                items:
-                  type: integer
-              example: "[[1212, 318, 257, 1332, 13]]"
+          type: string
         suffix:
           description:
             The suffix that comes after a completion of inserted text.
@@ -1756,6 +1735,7 @@ components:
             Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
           default: null
           nullable: true
+          x-speakeasy-terraform-ignore: true
           oneOf:
             - type: string
               default: <|endoftext|>

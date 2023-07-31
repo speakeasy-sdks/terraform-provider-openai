@@ -1,8 +1,6 @@
 internal/sdk/openai.go
 internal/sdk/sdk.go
 internal/provider/type_create_completion_response_choices.go
-internal/provider/type_create_completion_request_prompt.go
-internal/provider/type_create_completion_request_stop.go
 internal/provider/type_create_completion_response_usage.go
 internal/provider/type_images_response_data.go
 examples/README.md

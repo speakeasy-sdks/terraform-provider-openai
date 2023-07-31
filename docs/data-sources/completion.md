@@ -26,8 +26,7 @@ data "openai_completion" "my_completion" {
   model            = "text-curie-001"
   n                = 1
   presence_penalty = 38.44
-  prompt           = "This is a test."
-  stop             = "\n"
+  prompt           = "...my_prompt..."
   stream           = false
   suffix           = "test."
   temperature      = 1
@@ -43,9 +42,9 @@ data "openai_completion" "my_completion" {
 
 - `model` (String) must be one of [text-davinci-003, text-davinci-002, text-davinci-001, code-davinci-002, text-curie-001, text-babbage-001, text-ada-001]
 ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.
-- `prompt` (Attributes) The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.
+- `prompt` (String) The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.
 
-Note that <|endoftext|> is the document separator that the model sees during training, so if a prompt is not specified the model will generate as if from the beginning of a new document. (see [below for nested schema](#nestedatt--prompt))
+Note that <|endoftext|> is the document separator that the model sees during training, so if a prompt is not specified the model will generate as if from the beginning of a new document.
 
 ### Optional
 
@@ -75,7 +74,6 @@ The token count of your prompt plus `max_tokens` cannot exceed the model's conte
 - `presence_penalty` (Number) Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
 
 [See more information about frequency and presence penalties.](/docs/api-reference/parameter-details)
-- `stop` (Attributes) Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence. (see [below for nested schema](#nestedatt--stop))
 - `stream` (Boolean) Whether to stream back partial progress. If set, tokens will be sent as data-only [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format) as they become available, with the stream terminated by a `data: [DONE]` message. [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
 - `suffix` (String) The suffix that comes after a completion of inserted text.
 - `temperature` (Number) What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -93,26 +91,6 @@ We generally recommend altering this or `temperature` but not both.
 - `id` (String) The ID of this resource.
 - `object` (String)
 - `usage` (Attributes) (see [below for nested schema](#nestedatt--usage))
-
-<a id="nestedatt--prompt"></a>
-### Nested Schema for `prompt`
-
-Optional:
-
-- `array_ofarray_ofinteger` (List of List of Number)
-- `array_ofinteger` (List of Number)
-- `array_ofstr` (List of String)
-- `str` (String)
-
-
-<a id="nestedatt--stop"></a>
-### Nested Schema for `stop`
-
-Optional:
-
-- `array_ofstr` (List of String)
-- `str` (String)
-
 
 <a id="nestedatt--choices"></a>
 ### Nested Schema for `choices`
